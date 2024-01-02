@@ -79,7 +79,7 @@ export const DashboardContent = (props) => {
   return (
     <div>
       {props.pagecontent === "none" ? (
-        <div className="w-full h-[100vh] flex justify-center items-center">
+        <div className="w-full h-[100vh] flex justify-center items-center font-[Barlow]">
           <div
             align="center"
             className="w-[90%] p-[10px] bg-[#845EC2] rounded-md"
@@ -88,8 +88,8 @@ export const DashboardContent = (props) => {
           </div>
         </div>
       ) : (
-        <div className="w-[100%] flex flex-col justify-center items-center">
-          <div className="flex flex-row justify-center items-center w-[90%] bg-[#845EC2] mt-[20px] mb-[20px] rounded-md">
+        <div className="w-[100%] h-[100vh] flex flex-col justify-center items-center font-[Barlow]">
+          <div className="flex flex-row justify-center items-center w-[90%] bg-[#845EC2] mt-[11vh] lg:mt-[10px] mb-[20px] rounded-md">
             <div
               align="center"
               className="w-[100%] text-white text-[20px] p-[10px]"
@@ -101,7 +101,7 @@ export const DashboardContent = (props) => {
               })}
             </div>
           </div>
-          <div className="bg-white w-[90%] h-[85vh] rounded-md flex flex-row">
+          <div className="bg-white w-[90%] h-[75vh] rounded-md flex flex-row">
             <div className="w-[2%]"></div>
             <div
               className="menucenter w-[96%] mt-[10px] mb-[10px] overflow-y-auto  focus-visible:outline-none"

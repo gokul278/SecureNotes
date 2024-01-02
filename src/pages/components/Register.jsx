@@ -7,7 +7,7 @@ export const Register = () => {
   });
   const [showpass, setShowpass] = useState({ status: false });
   return (
-    <div className="register flex items-center background text-[40px] w-[80%] h-[50vh] lg:h-[70vh] bg-opacity-75 bg-white rounded-md border-2 border-[#845EC2]">
+    <div className="register flex items-center background text-[40px] w-[80%] h-[70vh] lg:h-[70vh] bg-opacity-75 bg-white rounded-md border-2 border-[#845EC2]">
       <div
         align="center"
         className="content w-[100%] lg:w-[55%] lg:h-full opacity-100 flex flex-col items-center justify-center"

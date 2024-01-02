@@ -11,7 +11,7 @@ export const Dashboard = () => {
   };
   
   return (
-    <div className="dashboard flex w-[100vw] h-[100vh]">
+    <div className="dashboard flex flex-col lg:flex-row w-[100vw] h-[100vh]">
       <div className="w-[100%] lg:w-[25%] bg-[#4B4453]">
         <DashboardMenu updatePageContent={updatePageContent} />
       </div>

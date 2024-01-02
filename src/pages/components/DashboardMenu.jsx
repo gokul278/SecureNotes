@@ -29,6 +29,8 @@ export const DashboardMenu = (props) => {
     }
   }
 
+  const [mobilemenu, setMobilemenu] = useState(false);
+
   const [newcontent, setNewcontent] = useState(false);
 
   const [editcontent, setEditcontent] = useState({
@@ -125,7 +127,7 @@ export const DashboardMenu = (props) => {
 
   return (
     <>
-      <div className="w-full font-[Barlow] z-0" align="center">
+      <div className="hidden lg:block w-full font-[Barlow] z-0" align="center">
         <div className="w-[90%] h-[13vh] flex items-center border-b-2 border-[#B0A8B9]">
           <div className="w-[20%]">
             <img className="w-full" src="./requiredfiles/logo.png" alt="" />
@@ -393,7 +395,7 @@ export const DashboardMenu = (props) => {
             })}
           </div>
         </div>
-        <div className="w-[90%] h-[12vh] flex flex-col items-start border-t-2 border-[#B0A8B9]">
+        <div className="w-[90%] h-[12vh] mt-[10px] flex flex-col items-start border-t-2 border-[#B0A8B9]">
           <div className="mt-[10px] text-white text-[18px] font-thin">
             gokulhk278@gmail.com
           </div>
@@ -406,10 +408,336 @@ export const DashboardMenu = (props) => {
         </div>
       </div>
 
+      <div
+        className={`w-full block lg:hidden ${
+          mobilemenu ? "h-[100vh]" : "h-[10vh]"
+        } fixed bg-[#4B4453]`}
+      >
+        <div className="w-[100%] h-[10vh] flex justify-center items-center ">
+          <div className="w-[85%] sm:w-[80%] flex items-center">
+            <img className="h-[9vh]" src="./requiredfiles/logo.png" alt="" />
+            <h1 className="pl-[6px] pt-[15px] text-white text-[30px] font-[Sevillana]">
+              Secure Notes
+            </h1>
+          </div>
+          <div className="w-[10%] h-[10vh] flex items-center justify-end">
+            <div>
+              {mobilemenu ? (
+                <i
+                  className="fa-solid fa-circle-xmark mt-[15px] text-[30px] text-white"
+                  onClick={() => {
+                    setMobilemenu(false);
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="fa-solid fa-bars mt-[15px] text-[30px] text-white"
+                  onClick={() => {
+                    setMobilemenu(true);
+                  }}
+                ></i>
+              )}
+            </div>
+          </div>
+        </div>
+        {mobilemenu ? (
+          <div className="h-[90vh] w-[100%] flex flex-col justify-center items-center font-[Barlow]">
+            <div className="w-[100%] border-t-2 border-[#B0A8B9]">
+              <div className="menucenter mt-[10px] w-[98%] h-[70vh] flex flex-row overflow-y-auto">
+                <div className="w-[2%]"></div>
+                <div className="w-[96%] flex flex-col items-start">
+                  {uniqueDateTimestamps.map((date) => {
+                    return checkDate(date) === "today" ? (
+                      <React.Fragment key={date}>
+                        <h1 className="text-white font-[12px] mt-[10px]">
+                          Today
+                        </h1>
+                        {data.map((item) => {
+                          return date === item.timestamp.split(" ")[0] ? (
+                            content === item.id ? (
+                              <button
+                                key={item.id}
+                                className="bg-[#845EC2] text-white w-full p-[10px] rounded-md flex flex-row items-center justify-center mt-[10px] mb-[10px]"
+                                onClick={() => {
+                                  props.updatePageContent(item.id);
+                                  SetContent(item.id);
+                                  setMobilemenu(false);
+                                }}
+                              >
+                                <div className="w-[70%]">{item.title}</div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-pen-to-square"
+                                    onClick={() => {
+                                      setEditcontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-trash"
+                                    onClick={() => {
+                                      setDeletecontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                              </button>
+                            ) : (
+                              <button
+                                key={item.id}
+                                className="bg-[#B0A8B9] w-full p-[10px] rounded-md flex flex-row items-center justify-center mt-[10px] mb-[10px]"
+                                onClick={() => {
+                                  props.updatePageContent(item.id);
+                                  SetContent(item.id);
+                                  setMobilemenu(false);
+                                }}
+                              >
+                                <div className="w-[70%]">{item.title}</div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-pen-to-square"
+                                    onClick={() => {
+                                      setEditcontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-trash"
+                                    onClick={() => {
+                                      setDeletecontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                              </button>
+                            )
+                          ) : null;
+                        })}
+                      </React.Fragment>
+                    ) : checkDate(date) === "yesterday" ? (
+                      <React.Fragment key={date}>
+                        <h1
+                          key={date}
+                          className="text-white font-[12px] mt-[10px]"
+                        >
+                          Yesterday
+                        </h1>
+                        {data.map((item) => {
+                          return date === item.timestamp.split(" ")[0] ? (
+                            content === item.id ? (
+                              <button
+                                key={item.id}
+                                className="bg-[#845EC2] text-white w-full p-[10px] rounded-md flex flex-row items-center justify-center mt-[10px] mb-[10px]"
+                                onClick={() => {
+                                  props.updatePageContent(item.id);
+                                  SetContent(item.id);
+                                  setMobilemenu(false);
+                                }}
+                              >
+                                <div className="w-[70%]">{item.title}</div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-pen-to-square"
+                                    onClick={() => {
+                                      setEditcontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-trash"
+                                    onClick={() => {
+                                      setDeletecontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                              </button>
+                            ) : (
+                              <button
+                                key={item.id}
+                                className="bg-[#B0A8B9] w-full p-[10px] rounded-md flex flex-row items-center justify-center mt-[10px] mb-[10px]"
+                                onClick={() => {
+                                  props.updatePageContent(item.id);
+                                  SetContent(item.id);
+                                  setMobilemenu(false);
+                                }}
+                              >
+                                <div className="w-[70%]">{item.title}</div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-pen-to-square"
+                                    onClick={() => {
+                                      setEditcontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-trash"
+                                    onClick={() => {
+                                      setDeletecontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                              </button>
+                            )
+                          ) : null;
+                        })}
+                      </React.Fragment>
+                    ) : checkDate(date) === "anotherday" ? (
+                      <React.Fragment key={date}>
+                        <h1
+                          key={date}
+                          className="text-white font-[12px] mt-[10px]"
+                        >
+                          {date}
+                        </h1>
+                        {data.map((item) => {
+                          return date === item.timestamp.split(" ")[0] ? (
+                            content === item.id ? (
+                              <button
+                                key={item.id}
+                                className="bg-[#845EC2] text-white w-full p-[10px] rounded-md flex flex-row items-center justify-center mt-[10px] mb-[10px]"
+                                onClick={() => {
+                                  props.updatePageContent(item.id);
+                                  SetContent(item.id);
+                                  setMobilemenu(false);
+                                }}
+                              >
+                                <div className="w-[70%]">{item.title}</div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-pen-to-square"
+                                    onClick={() => {
+                                      setEditcontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-trash"
+                                    onClick={() => {
+                                      setDeletecontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                              </button>
+                            ) : (
+                              <button
+                                key={item.id}
+                                className="bg-[#B0A8B9] w-full p-[10px] rounded-md flex flex-row items-center justify-center mt-[10px] mb-[10px]"
+                                onClick={() => {
+                                  props.updatePageContent(item.id);
+                                  SetContent(item.id);
+                                  setMobilemenu(false);
+                                }}
+                              >
+                                <div className="w-[70%]">{item.title}</div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-pen-to-square"
+                                    onClick={() => {
+                                      setEditcontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                                <div className="w-[12%]">
+                                  <i
+                                    className="fa-solid fa-trash"
+                                    onClick={() => {
+                                      setDeletecontent({
+                                        status: true,
+                                        id: item.id,
+                                        title: item.title,
+                                      });
+                                    }}
+                                  ></i>
+                                </div>
+                              </button>
+                            )
+                          ) : null;
+                        })}
+                      </React.Fragment>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            </div>
+            <div className="w-[90%] h-[12vh] mt-[10px] flex flex-col items-start border-t-2 border-[#B0A8B9]">
+              <div className="mt-[10px] text-white text-[18px] font-thin">
+                gokulhk278@gmail.com
+              </div>
+              <div className="w-[100%] flex">
+                <div className="w-[80%]">
+                  <Link
+                    to="/"
+                    className="mt-[10px] mb-[10px] h-[40px] bg-[#FF8066] text-[18px] text-white w-[100%] flex justify-center items-center rounded-md"
+                  >
+                    Logout
+                  </Link>
+                </div>
+                <div className="w-[20%] flex justify-center items-center">
+                  <i
+                    className="fa-solid fa-plus text-[20px] text-white p-[10px] bg-[#845EC2] rounded-md cursor-pointer"
+                    onClick={() => {
+                      setNewcontent(true);
+                    }}
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+
       {newcontent ? (
         <>
           <div className="modal-overlay font-[Barlow] flex justify-center items-center fixed inset-0 bg-black bg-opacity-50 z-50">
-            <div className="w-[30%] h-[30%] bg-white rounded-md">
+            <div className="w-[80%] lg:w-[30%] h-[28%] lg:h-[30%] bg-white rounded-md">
               <div className="w-[100%] text-[#845EC2] text-[30px] flex items-center justify-end">
                 <div className="w-[80%]">
                   <h1 className="text-black text-[20px] m-[12px]">
@@ -451,7 +779,7 @@ export const DashboardMenu = (props) => {
       {editcontent.status ? (
         <>
           <div className="modal-overlay font-[Barlow] flex justify-center items-center fixed inset-0 bg-black bg-opacity-50 z-50">
-            <div className="w-[30%] h-[30%] bg-white rounded-md">
+            <div className="w-[80%] lg:w-[30%] h-[28%] lg:h-[30%] bg-white rounded-md">
               <div className="w-[100%] text-[#845EC2] text-[30px] flex items-center justify-end">
                 <div className="w-[80%]">
                   <h1 className="text-black text-[20px] m-[12px]">
@@ -494,7 +822,7 @@ export const DashboardMenu = (props) => {
       {deletecontent.status ? (
         <>
           <div className="modal-overlay font-[Barlow] flex justify-center items-center fixed inset-0 bg-black bg-opacity-50 z-50">
-            <div className="w-[30%] h-[30%] bg-white rounded-md">
+            <div className="w-[80%] lg:w-[30%] h-[28%] lg:h-[30%] bg-white rounded-md">
               <div className="w-[100%] text-[#845EC2] text-[30px] flex items-center justify-end">
                 <div className="w-[80%]">
                   <h1 className="text-black text-[20px] m-[12px]">

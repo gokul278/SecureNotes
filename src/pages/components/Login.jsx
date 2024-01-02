@@ -7,7 +7,7 @@ export const Login = () => {
   });
   const [showpass, setShowpass] = useState({ status: false });
   return (
-    <div className="login flex background text-[40px] w-[80%] h-[50vh] lg:h-[70vh] bg-opacity-75 bg-white rounded-md border-2 border-[#845EC2]">
+    <div className="login flex background text-[40px] w-[80%] h-[65vh] lg:h-[70vh] bg-opacity-75 bg-white rounded-md border-2 border-[#845EC2]">
       <div className="logo w-[45%] h-full opacity-100 hidden lg:block">
         <img
           className="w-full h-full rounded-md"
